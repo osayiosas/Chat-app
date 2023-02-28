@@ -6,7 +6,6 @@ import {
   onSnapshot,
   query,
   where,
-  orderBy,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import "../styles/Chat.css";
@@ -23,7 +22,7 @@ export const Chat = (props) => {
     const querymessages = query(
       messagesRef,
       where("room", "==", room),
-      orderBy("createdAt"),
+    
     );
     const unsucribe = onSnapshot(querymessages, (snapshot) => {
       let messages = [];
@@ -38,7 +37,7 @@ export const Chat = (props) => {
      
 
     return () => unsucribe();
-  }, []);
+  }, [messagesRef, room]);
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
